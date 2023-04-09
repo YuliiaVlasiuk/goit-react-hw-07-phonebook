@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { nanoid } from 'nanoid';
-//import * as Yup from 'yup';
 import { Formik, Field } from 'formik';
 import { Form, FormField, ErrorMessage } from './ContactForm.styled';
 import { selectContacts } from 'redux/selectors';
@@ -10,6 +9,7 @@ import { selectContacts } from 'redux/selectors';
 import Notiflix from 'notiflix';
 
 import { addContact } from 'redux/operations';
+
 
 export const ContactForm = () => {
   const [name, setName] = useState('');
@@ -25,16 +25,11 @@ export const ContactForm = () => {
   const handleSubmit = event => {
     event.preventDefault();
 
-   console.log(name);
-   console.log(phone);
-
-    const newContact = {
+   const newContact = {
       id: nanoid(),
       name,
       phone,
     };
-
-   console.log(newContact);
 
     const arrayOfContactsName = [];
 
@@ -52,21 +47,19 @@ export const ContactForm = () => {
       return;
     }
 
-
     dispatch(addContact(newContact));
     setName('');
     setPhone('');
   };
 
   return (
-    <Formik
-      // validationSchema={phoneSchema}
-      initialValues={{ name: '', phone: '' }}
+    <Formik  
+       initialValues={{ name: '', phone: '' }}
     >
-      <Form onSubmit={handleSubmit}>
+      <Form onSubmit={handleSubmit} >
         <FormField>
           Name
-          <Field name="name" value={name} onChange={onChangeName} pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"/>
+          <Field name="name" value={name} onChange={onChangeName}  pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"/>
           <ErrorMessage name="name" component="div" />
         </FormField>
 
@@ -82,7 +75,7 @@ export const ContactForm = () => {
           <ErrorMessage name="phone" component="div" />
         </FormField>
 
-        <button type="submit">Add contact</button>
+        <button type="submit" >Add contact</button>
       </Form>
     </Formik>
   );

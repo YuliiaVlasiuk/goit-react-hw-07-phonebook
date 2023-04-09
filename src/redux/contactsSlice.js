@@ -1,5 +1,4 @@
 
-
 import { createSlice } from "@reduxjs/toolkit";
 import { fetchContacts, addContact, deleteContact } from "./operations";
 
@@ -19,7 +18,12 @@ const contactsSlice = createSlice({
     isLoading: false,
     error: null,
     filter: ""
-  },
+ },
+ reducers:{
+  checkFilter(state, { payload }) {
+    state.filter = payload;
+  }},
+
     
   extraReducers: builder =>
         builder
@@ -50,8 +54,5 @@ const contactsSlice = createSlice({
            
 });
 
-
-export const contactsActions = [fetchContacts, addContact, deleteContact];
-
 export const contactsReducer = contactsSlice.reducer;
-
+export const { checkFilter } =contactsSlice.actions;
