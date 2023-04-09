@@ -7,19 +7,16 @@ import { Filter } from './Filter/Filter';
 import { fetchContacts } from 'redux/operations';
 import { useEffect } from 'react';
 
-import css from "./App.module.css";
+import css from './App.module.css';
 export const App = () => {
-  
-  
   const contacts = useSelector(selectContacts);
   const dispatch = useDispatch();
   const isLoading = useSelector(selectIsLoading);
   const error = useSelector(selectError);
-  
-    useEffect(() => {
-      dispatch(fetchContacts());
-    }, [dispatch]);
-  
+
+  useEffect(() => {
+    dispatch(fetchContacts());
+  }, [dispatch]);
 
   return (
     <Layout>
@@ -34,5 +31,3 @@ export const App = () => {
     </Layout>
   );
 };
-
-
